@@ -1,0 +1,23 @@
+{
+  "name": "@avtickest/common",
+  "version": "1.0.1",
+  "description": "",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build/**/*"
+  ],
+  "scripts": {
+    "clean": "del ./build/*",
+    "build": "npm run clean && tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.3.1",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

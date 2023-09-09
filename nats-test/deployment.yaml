@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nats-test-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nats-test
+  template:
+    metadata:
+      labels:
+        app: nats-test
+    spec:
+      containers:
+        - name: nats-test-container
+          image: nats-test:latest
+          ports:
+            - containerPort: 3000
