@@ -11,7 +11,6 @@ const verifyToken = (req: any, res: any, next: any) => {
   if (!token) {
     return next(createError(401, "User Not Authenticated"));
   }
-
   jwt.verify(token, "ashishverma20032300", (err: any, user: any) => {
     if (err) {
       return next(createError(401, "Token Is Invalid"));

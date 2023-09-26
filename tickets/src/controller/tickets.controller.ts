@@ -1,5 +1,13 @@
 import ticketDatabase from "../model/tickets.model";
-import createError from "../../../common/src/errorHandler";
+// import createError from "../../../common/src/errorHandler";
+import { TicketCreatedPublisher, TicketUpdatedPublisher } from "../events/ticket-publisher";
+import { natsWrapper } from "../nats-wrapper";
+
+const createError = (status: number, message: string): Error => {
+  const err = new Error(message);
+  (err as any).status = status;
+  return err;
+};
 const createTicket = async (req: any, res: any, next: any) => {
   try {
     const tickets = await ticketDatabase.create({
@@ -11,6 +19,13 @@ const createTicket = async (req: any, res: any, next: any) => {
       return next(createError(500, "something went wrong"));
     }
 
+   await new TicketCreatedPublisher(natsWrapper.client).publish({
+      id:tickets._id,
+      title:tickets.title,
+      price:tickets.price,
+      userId:tickets.userId,
+      version:tickets.version
+    })
     return res.status(201).json({
       success: true,
       message: "ticket created successfully",
@@ -66,6 +81,17 @@ const updateTickets = async (req: any, res: any, next: any) => {
     if (!ticket) {
       return next(createError(500, "something went wrong"));
     }
+    if (ticket.orderId) {
+      return next(createError(500, "Ticket has book do not updated"));
+    }
+
+     new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id:ticket._id,
+      title:ticket.title,
+      price:ticket.price,
+      userId:ticket.userId,
+      version:ticket.version
+    })
     return res.status(200).json({
       success: true,
       message: "ticket updated successfully",

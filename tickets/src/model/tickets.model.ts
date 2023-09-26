@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
-
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 require("dotenv").config();
 
 interface ITicketsSchema extends mongoose.Document {
   title: string;
-  price: Number;
+  price: number;
   userId: string;
+  version:number,
+  orderId?:string
 }
 
 const ticketSchema = new mongoose.Schema<ITicketsSchema>(
@@ -23,9 +25,17 @@ const ticketSchema = new mongoose.Schema<ITicketsSchema>(
       type: String,
       required: [true, "UserId Required"],
     },
+    version: {
+      type: Number,
+      default: 0,
+    },
+    orderId: {
+      type: String, 
+    },
   },
 
   { timestamps: true }
 );
-
-export default mongoose.model<ITicketsSchema>("ticketsDatabase", ticketSchema);
+ticketSchema.set('versionKey','version')
+ticketSchema.plugin(updateIfCurrentPlugin)
+export default mongoose.model<ITicketsSchema>("ticketsdatabases", ticketSchema);

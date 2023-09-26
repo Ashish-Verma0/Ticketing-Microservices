@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyToken } from "../../../common/src/verifyToken";
+import { verifyToken } from "../verifyToken";
 
 import {
   createTicket,

@@ -13,7 +13,7 @@ app.use(cors({
     credentials: true,
 }))
 // Routes
-app.use("/api/v1",authRoutes)
+app.use("/api/users",authRoutes)
 
 app.get("/", (req:any, res:any)=>{
     res.send("Hello World!")

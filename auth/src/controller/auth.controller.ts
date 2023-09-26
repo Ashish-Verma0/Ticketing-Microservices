@@ -1,6 +1,11 @@
 import authDatabase from "../model/auth.model";
-import createError from "../../../common/src/errorHandler";
+// import createError from "../../../common/src/errorHandler";
 import sendToken from "../utils/sendToken";
+const createError = (status: number, message: string): Error => {
+  const err = new Error(message);
+  (err as any).status = status;
+  return err;
+};
 const createUser = async (req: any, res: any, next: any) => {
   try {
     if (!req.body.email || !req.body.name || !req.body.password) {

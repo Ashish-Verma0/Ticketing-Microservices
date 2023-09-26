@@ -4,8 +4,8 @@ import { ErrorRequestHandler, Request, Response } from "express";
 const cookieParser = require("cookie-parser");
 const app = express();
 app.use(express.json());
-app.use(cookieParser());
-app.use("/api/v1", ticketRoutes);
+app.use(cookieParser({secure:false}));
+app.use("/api/tickets", ticketRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
