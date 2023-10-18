@@ -3,7 +3,8 @@ import request from "supertest";
 import app from "../../app";
 import orderDatabase from "../../models/orders.model";
 import ticketDatabase from "../../models/ticket.model";
-import { OrderStatus } from "../../../../common/src/types/order-status";
+// import { OrderStatus } from "../../../../common/src/types/order-status";
+import {OrderStatus} from "@ashish_tickets/common"
 jest.mock("../../nats-wrapper")
 
 it("returns an error if the ticket does not exists", async()=>{

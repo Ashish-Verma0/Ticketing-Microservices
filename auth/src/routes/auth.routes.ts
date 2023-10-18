@@ -1,12 +1,14 @@
 import express from "express";
-import { verifyToken } from "../verifyToken";
 import {
   LoginUser,
   createUser,
   signIn,
   signOut,
 } from "../controller/auth.controller";
-// const {createUser,signIn,LoginUser,signOut} =require("../controller/auth.controller.ts")
+// import {verifyToken} from "../../../common/src/verifyToken"
+import { verifyToken } from "@ashish_tickets/common";
+
+
 const authRoutes = express.Router();
 
 authRoutes.post("/signup", createUser);

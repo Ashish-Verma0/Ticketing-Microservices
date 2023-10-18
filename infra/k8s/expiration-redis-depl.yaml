@@ -12,9 +12,11 @@ spec:
       labels:
         app: expiration-redis
     spec:
+      securityContext:
+        fsGroup: 2000  # The GID that owns the volume
       containers:
         - name: expiration-redis
-          image: redis
+          image: redis:latest
 ---
 apiVersion: v1
 kind: Service

@@ -3,7 +3,6 @@ const authRoutes = require("../src/routes/auth.routes")
 const cookieParser = require("cookie-parser")
 const cors =require( "cors")
 const app = express()
-require("dotenv").config()
 
 app.set('trust proxy',true)
 app.use(express.json())

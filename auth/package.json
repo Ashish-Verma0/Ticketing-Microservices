@@ -18,6 +18,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ashish_tickets/common": "^1.0.10",
+    "@ashishtickets/common": "^1.0.1",
     "@types/express": "^4.17.17",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",

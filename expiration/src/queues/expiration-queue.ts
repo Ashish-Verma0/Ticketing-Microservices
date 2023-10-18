@@ -1,28 +1,32 @@
 import Queue from "bull";
+import { ExpirationCompletePublisher } from "../events/publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 interface payload {
   orderId: string;
 }
-// console.log("ashishhhhhhhh",process.env.REDIS_HOST)
+
 const expirationQueue = new Queue<payload>("order:expiration", {
   redis: {
-    host: "expiration-redis-srv",
-    port:6379
+    host: process.env.REDIS_HOST || "expiration-redis-srv",
   },    
 });
 
+const data=async()=>{
+  try {
+    let res=await expirationQueue.add({orderId:"hello"})
+    console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
+}
+data()
+
 expirationQueue.process(async (job) => {
-  console.log("ashishhh", job.data);
-  console.log(
-    "I want to publish an expiration:complete event for orderId",
-    job.data.orderId
-  );
+  console.log("I want to publish an expiration:complete event for orderId", job.data.orderId);
+   new ExpirationCompletePublisher(natsWrapper.client).publish({
+    orderId:job.data.orderId
+   })
 });
 
-// Add a test job to the queue
-expirationQueue.add({ orderId: "test" });
-
-// export { expirationQueue }
-
-
-
+export { expirationQueue }

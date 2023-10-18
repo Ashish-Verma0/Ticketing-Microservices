@@ -1,6 +1,5 @@
 import express from "express";
-import { verifyToken } from "../verifyToken";
-
+import { verifyToken } from "@ashish_tickets/common";
 import {
   createTicket,
   getAllTicket,

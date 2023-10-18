@@ -1,9 +1,11 @@
 import { Message } from "node-nats-streaming";
-import { OrderCancelledEvent, OrderCreatedEvent } from "../../../common/src/events/allEvents";
-import { Subjects } from "../../../common/src/events/subjects";
-import { Listener } from "../../../common/src/events/base-listerner";
+// import { OrderCancelledEvent, OrderCreatedEvent } from "../../../common/src/events/allEvents";
+// import { Subjects } from "../../../common/src/events/subjects";
+// import { Listener } from "../../../common/src/events/base-listerner";
 import ticketDatabase from "../model/tickets.model";
 import { TicketUpdatedPublisher } from "./ticket-publisher";
+
+import {OrderCancelledEvent,OrderCreatedEvent,Subjects,Listener} from "@ashish_tickets/common"
 
 // ye oreder service se data aa raha hai
 export class OrderCreatedListerner extends Listener<OrderCreatedEvent> {

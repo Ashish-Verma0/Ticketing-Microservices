@@ -2,7 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import orderDatabase from "../models/orders.model";
 import ticketsdatabases from "../models/ticket.model";
 // import createError from "../../../common/src/errorHandler";
-import { OrderStatus } from "../../../common/src/types/order-status";
+// import { OrderStatus } from "../../../common/src/types/order-status";
+import {OrderStatus} from "@ashish_tickets/common"
 import {
   OrderCancelledPublisher,
   OrderCreatedPublisher,
@@ -15,7 +16,6 @@ const createError = (status: number, message: string): Error => {
   (err as any).status = status;
   return err;
 };
-
 const createOrder = async (req: any, res: any, next: any) => {
   try {
     const { ticketId } = req.body;

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { OrderStatus } from "../../../common/src/types/order-status";
+// import { OrderStatus } from "../../../common/src/types/order-status";
+import {OrderStatus} from "@ashish_tickets/common"
 import { TicketDoc } from "./ticket.model";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 

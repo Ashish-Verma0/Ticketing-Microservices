@@ -1,6 +1,6 @@
 import express from "express"
 import { createOrder, deleteOrderById, findUserOrders, getOrderById, getOrders } from "../controllers/orders.controllers"
-import {verifyToken} from "../verifyToken"
+import { verifyToken } from "@ashish_tickets/common";
 const orderRouter=express.Router()
 
 orderRouter.post("/create",verifyToken,createOrder)

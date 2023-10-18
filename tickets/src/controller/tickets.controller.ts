@@ -8,6 +8,7 @@ const createError = (status: number, message: string): Error => {
   (err as any).status = status;
   return err;
 };
+
 const createTicket = async (req: any, res: any, next: any) => {
   try {
     const tickets = await ticketDatabase.create({

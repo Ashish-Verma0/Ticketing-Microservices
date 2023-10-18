@@ -46,7 +46,14 @@ export interface OrderCancelledEvent{
         // userId:string,
         // status:OrderStatus,
         // expiresAt:string,
-        ticket:Object,
         version:number
+        ticket:Object,
+    }
+}
+export interface ExpirationCompleteEvent{
+    subject:Subjects.ExpirationComplete
+
+    data:{
+      orderId:string
     }
 }

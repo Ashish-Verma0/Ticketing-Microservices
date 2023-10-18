@@ -17,10 +17,11 @@ class NatsWrapper {
     return new Promise<void>((resolve,reject)=>{
         this.client.on("connect", () => {
           console.log("Connected to NATS");
-       new OrderCreatedListerner(this.client).listen()
+          new OrderCreatedListerner(this.client).listen()
           resolve()
         });
         this.client.on("error", (err) => {
+          console.log("err",err)
           reject(err)
         });
     })

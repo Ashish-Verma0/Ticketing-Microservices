@@ -1,5 +1,5 @@
 import nats, { Stan } from "node-nats-streaming";
-import { TicketCreatedListerner, TicketUpdatedListerner } from "./event/listener";
+import { ExpirationCompleteListerner, TicketCreatedListerner, TicketUpdatedListerner } from "./event/listener";
 
 class NatsWrapper {
   private _client?: Stan;
@@ -18,6 +18,7 @@ class NatsWrapper {
         this.client.on("connect", () => {
         new TicketCreatedListerner(this.client).listen()
         new TicketUpdatedListerner(this.client).listen()
+        new ExpirationCompleteListerner(this.client).listen()
 
           console.log("Connected to NATS");
           resolve()
